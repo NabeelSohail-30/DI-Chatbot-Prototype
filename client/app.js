@@ -8,6 +8,10 @@ chatInput.addEventListener('keydown', (event) => {
     }
 });
 
+chatButton.addEventListener('click', (event) => {
+    sendMessage();
+});
+
 async function sendMessage() {
     const message = chatInput.value.trim();
     displayMessage(message, 'user');
