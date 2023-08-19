@@ -38,7 +38,7 @@ app.post('/', async (req, res) => {
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
-            throw new Error('Fine-tune data not provided');
+            throw new Error('data not provided');
         }
 
         console.log('------------------Loading test data------------------')
