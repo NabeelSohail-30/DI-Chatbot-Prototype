@@ -12,7 +12,7 @@ import { loadDocData } from './loader/docLoader.mjs';
 import { createVectorStore, loadVectorStore } from './services/vectorStore.mjs';
 import { processText } from './services/textProcessing.mjs';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { loadQAStuffChain, loadQAMapReduceChain } from "langchain/chains";
+import { loadQAStuffChain, loadQAMapReduceChain, loadQARefineChain } from "langchain/chains";
 
 
 dotenv.config();
@@ -61,7 +61,7 @@ app.post('/', async (req, res) => {
 
         console.log("------------------Loading QA chain------------------");
 
-        const chainA = loadQAMapReduceChain(llmA);
+        const chainA = loadQARefineChain(llmA);
         // const chainA = loadQAStuffChain(llmA);
         const response = await chainA.call({
             input_documents: result,
