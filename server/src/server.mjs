@@ -61,7 +61,7 @@ app.post('/', async (req, res) => {
 
         console.log("------------------Loading QA chain------------------");
 
-        const chainA = loadQARefineChain(llmA);
+        const chainA = loadQAMapReduceChain(llmA);
         // const chainA = loadQAStuffChain(llmA);
         const response = await chainA.call({
             input_documents: result,
