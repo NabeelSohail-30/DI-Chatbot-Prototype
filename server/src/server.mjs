@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
     try {
         const { message } = req.body;
 
-        const dataFilePath = './data/Ghusl.docx';
+        const dataFilePath = './data/data2.txt';
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
@@ -44,7 +44,7 @@ app.post('/', async (req, res) => {
 
         console.log('------------------Loading test data------------------')
 
-        const docs = await loadDocData(dataFilePath);
+        const docs = await loadTextData(dataFilePath);
 
         console.log('------------------Test Data Loaded------------------')
 
@@ -61,8 +61,7 @@ app.post('/', async (req, res) => {
 
         console.log("------------------Loading QA chain------------------");
 
-        const chainA = loadQAMapReduceChain(llmA);
-        // const chainA = loadQAStuffChain(llmA);
+        const chainA = loadQAStuffChain(llmA);
         const response = await chainA.call({
             input_documents: result,
             question: message,
