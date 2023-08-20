@@ -8,6 +8,7 @@ import { handleError } from './utils/errorHandlers.mjs';
 import { createOpenAIClient } from './config/openai.mjs';
 import { loadTextData } from './loader/textLoader.mjs';
 import { loadPDFData } from './loader/pdfLoader.mjs';
+import { loadDocData } from './loader/docLoader.mjs';
 import { createVectorStore, loadVectorStore } from './services/vectorStore.mjs';
 import { processText } from './services/textProcessing.mjs';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
@@ -34,7 +35,7 @@ app.post('/', async (req, res) => {
     try {
         const { message } = req.body;
 
-        const dataFilePath = './data/GhuslUrdu.pdf';
+        const dataFilePath = './data/Ghusl.docx';
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
@@ -43,7 +44,7 @@ app.post('/', async (req, res) => {
 
         console.log('------------------Loading test data------------------')
 
-        const docs = await loadPDFData(dataFilePath);
+        const docs = await loadDocData(dataFilePath);
 
         console.log('------------------Test Data Loaded------------------')
 
