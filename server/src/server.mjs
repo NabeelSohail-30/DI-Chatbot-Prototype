@@ -69,8 +69,8 @@ app.post('/', async (req, res) => {
         // const chainA = RetrievalQAChain.fromLLM(llmA, vectorStoreRetriever);
 
         const chainA = ConversationalRetrievalQAChain.fromLLM(
-            model,
-            vectorStore.asRetriever(),
+            llmA,
+            result.asRetriever(),
             {
                 memory: new BufferMemory({
                     memoryKey: "chat_history",
