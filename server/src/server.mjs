@@ -61,14 +61,14 @@ app.post('/', async (req, res) => {
 
         console.log("------------------Loading QA chain------------------");
 
-        const vectorStoreRetriever = result.asRetriever();
-        const chainA = RetrievalQAChain.fromLLM(llmA, vectorStoreRetriever);
+        // const vectorStoreRetriever = result.asRetriever();
+        // const chainA = RetrievalQAChain.fromLLM(llmA, vectorStoreRetriever);
 
-        // const chainA = loadQAChain(llmA);
+        const chainA = loadQAChain(llmA);
         const response = await chainA.call({
-            // input_documents: result,
-            // question: message,
-            query: message,
+            input_documents: result,
+            question: message,
+            // query: message,
         });
 
         console.log("------------------QA chain result------------------");
