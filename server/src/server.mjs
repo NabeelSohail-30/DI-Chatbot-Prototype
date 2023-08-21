@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
     try {
         const { message } = req.body;
 
-        const dataFilePath = './data/data2.txt';
+        const dataFilePath = './data/Ghusul.txt';
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
