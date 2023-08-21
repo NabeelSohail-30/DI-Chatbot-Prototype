@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
     try {
         const { message } = req.body;
 
-        const dataFilePath = './data/Ghusul.txt';
+        const dataFilePath = './data/data3.txt';
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
@@ -71,7 +71,6 @@ app.post('/', async (req, res) => {
         const response = await chainA.call({
             input_documents: result,
             question: message,
-            // query: message,
         });
 
         console.log("------------------QA chain result------------------");
