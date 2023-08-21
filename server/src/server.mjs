@@ -11,8 +11,9 @@ import { loadPDFData } from './loader/pdfLoader.mjs';
 import { loadDocData } from './loader/docLoader.mjs';
 import { createVectorStore, loadVectorStore } from './services/vectorStore.mjs';
 import { processText } from './services/textProcessing.mjs';
+import { BufferMemory } from "langchain/memory";
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { loadQAStuffChain, loadQAMapReduceChain, loadQARefineChain, loadQAChain, RetrievalQAChain } from "langchain/chains";
+import { loadQAStuffChain, loadQAMapReduceChain, loadQARefineChain, loadQAChain, RetrievalQAChain, ConversationalRetrievalQAChain } from "langchain/chains";
 
 
 dotenv.config();
@@ -59,7 +60,7 @@ app.post('/', async (req, res) => {
 
         const llmA = new OpenAI({
             temperature: 0.9,
-            max_tokens: 250,
+            max_tokens: 1500,
         });
 
         console.log("------------------Loading QA chain------------------");
@@ -67,7 +68,17 @@ app.post('/', async (req, res) => {
         // const vectorStoreRetriever = result.asRetriever();
         // const chainA = RetrievalQAChain.fromLLM(llmA, vectorStoreRetriever);
 
-        const chainA = loadQAChain(llmA);
+        const chainA = ConversationalRetrievalQAChain.fromLLM(
+            model,
+            vectorStore.asRetriever(),
+            {
+                memory: new BufferMemory({
+                    memoryKey: "chat_history",
+                }),
+            }
+        );
+
+        // const chainA = loadQAChain(llmA);
         const response = await chainA.call({
             input_documents: result,
             question: message,
