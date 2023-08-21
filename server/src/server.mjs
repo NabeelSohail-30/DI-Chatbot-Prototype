@@ -59,7 +59,7 @@ app.post('/', async (req, res) => {
 
         const llmA = new OpenAI({
             temperature: 0.9,
-            max_tokens: 1050,
+            max_tokens: 250,
         });
 
         console.log("------------------Loading QA chain------------------");
