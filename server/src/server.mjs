@@ -36,7 +36,7 @@ app.post('/', async (req, res) => {
     try {
         const { message } = req.body;
 
-        const dataFilePath = './data/WuduEnglish.pdf';
+        const dataFilePath = './data/Wudu2Eng.txt';
         const vectorDataPath = './vectorData';
 
         if (!dataFilePath) {
@@ -45,7 +45,7 @@ app.post('/', async (req, res) => {
 
         console.log('------------------Loading test data------------------')
 
-        const docs = await loadPDFData(dataFilePath);
+        const docs = await loadTextData(dataFilePath);
 
         console.log('------------------Test Data Loaded------------------')
 
