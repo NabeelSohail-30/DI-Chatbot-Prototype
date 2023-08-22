@@ -68,17 +68,17 @@ app.post('/', async (req, res) => {
         // const vectorStoreRetriever = result.asRetriever();
         // const chainA = RetrievalQAChain.fromLLM(llmA, vectorStoreRetriever);
 
-        const chainA = ConversationalRetrievalQAChain.fromLLM(
-            llmA,
-            result.asRetriever(),
-            {
-                memory: new BufferMemory({
-                    memoryKey: "chat_history",
-                }),
-            }
-        );
+        // const chainA = ConversationalRetrievalQAChain.fromLLM(
+        //     llmA,
+        //     result.asRetriever(),
+        //     {
+        //         memory: new BufferMemory({
+        //             memoryKey: "chat_history",
+        //         }),
+        //     }
+        // );
 
-        // const chainA = loadQAChain(llmA);
+        const chainA = loadQAChain(llmA);
         const response = await chainA.call({
             input_documents: result,
             question: message,
