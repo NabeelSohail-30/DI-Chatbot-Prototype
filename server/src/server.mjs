@@ -78,6 +78,8 @@ app.post('/', async (req, res) => {
         //     }
         // );
 
+        const prompt = `Generate the answer for the following question from the given context and do not translate the data which is in arabic language.\n\nContext: ${result}\n\nQuestion: ${message}\n\nAnswer:`;
+
         const chainA = loadQAChain(llmA);
         const response = await chainA.call({
             input_documents: result,
